@@ -40,7 +40,6 @@ Consider sums of a three-measurement sliding window. How many sums are larger th
 import os
 
 def get_increases(input_file):
-    input = []
     with open(input_file) as f:
         total = 0
         lines = [int(line.strip()) for line in f]

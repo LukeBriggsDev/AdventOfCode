@@ -55,7 +55,6 @@ How many measurements are larger than the previous measurement?
 import os
 
 def get_increases(input_file):
-    input = []
     with open(input_file) as f:
         total = 0
         previous_num = int(f.readline().strip("\n "))
