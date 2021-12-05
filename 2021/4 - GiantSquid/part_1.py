@@ -68,6 +68,9 @@ class BingoCard:
         self.card = card
 
     def dab_number(self, num):
+        """Checks off number on card
+        :returns True if card has hit bingo
+        """
         for row_index in range(len(self.card)):
             for col_index in range(5):
                 if self.card[row_index][col_index] == num:
@@ -89,6 +92,18 @@ class BingoCard:
 
         return False
 
+def cards_from_file(txt):
+    bingo_cards = []
+
+    # Create bingo cards
+    for i in range(2, len(txt), 6):
+        new_card = []
+        for j in range(5):
+            new_card.append([int(num) for num in txt[i+j].strip().split(" ") if num != ""])
+
+        bingo_cards.append(BingoCard(new_card))
+
+    return bingo_cards
 
 def get_score(input_file):
     with open(input_file) as f:
@@ -96,14 +111,7 @@ def get_score(input_file):
 
     called_nums = [int(x) for x in txt[0].strip().split(",")]
 
-    bingo_cards = []
-
-    for i in range(2, len(txt), 6):
-        new_card = []
-        for j in range(5):
-            new_card.append([int(num) for num in txt[i+j].strip().split(" ") if num != ""])
-
-        bingo_cards.append(BingoCard(new_card))
+    bingo_cards = cards_from_file(txt)
 
     winning_card = None
 
@@ -128,5 +136,5 @@ def get_score(input_file):
 
 
 if __name__ == "__main__":
-    print(get_score(os.path.dirname(__file__) + "/test.txt"))
+    print(get_score(os.path.dirname(__file__) + "/input.txt"))
     

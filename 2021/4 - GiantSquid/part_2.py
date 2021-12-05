@@ -12,7 +12,7 @@ Figure out which board will win last. Once it wins, what would its final score b
 
 import os
 
-from part_1 import BingoCard
+from part_1 import BingoCard, cards_from_file
 
 
 def get_score(input_file):
@@ -21,19 +21,13 @@ def get_score(input_file):
 
     called_nums = [int(x) for x in txt[0].strip().split(",")]
 
-    bingo_cards = []
-
-    for i in range(2, len(txt), 6):
-        new_card = []
-        for j in range(5):
-            new_card.append([int(num) for num in txt[i+j].strip().split(" ") if num != ""])
-
-        bingo_cards.append(BingoCard(new_card))
+    bingo_cards = cards_from_file(txt)
 
     winning_cards = []
 
     call = 0
 
+    # While not all the cards have won
     while len(winning_cards) < len(bingo_cards):
         for card_index in range(len(bingo_cards)):
             if bingo_cards[card_index].dab_number(called_nums[call]) and card_index not in winning_cards:
@@ -47,10 +41,10 @@ def get_score(input_file):
         for col in row:
             if col != "CHECKED":
                 total += col
+                print(col)
+
     return total * called_nums[call-1]
 
     
-
-
 if __name__ == "__main__":
     print(get_score(os.path.dirname(__file__) + "/input.txt"))
