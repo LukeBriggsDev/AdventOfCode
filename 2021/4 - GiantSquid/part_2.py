@@ -41,7 +41,7 @@ def get_score(input_file):
         for col in row:
             if col != "CHECKED":
                 total += col
-                print(col)
+
 
     return total * called_nums[call-1]
 
