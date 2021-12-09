@@ -70,6 +70,10 @@ def count_uniques(input_file):
                     decoded_output.append(str(i))
         decoded_outputs.append(decoded_output)
 
+    for i in range(len(decoded_outputs)):
+        print(entries[i])
+        print(''.join(decoded_outputs[i]))
+
     return sum([int(''.join(x)) for x in decoded_outputs])
 
         
