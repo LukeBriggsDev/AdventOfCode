@@ -86,4 +86,5 @@ def find_basins(input_file):
     return math.prod(sorted([len(basin) for basin in basins], reverse=True)[:3])
 
 if __name__ == "__main__":
-    print(find_basins(os.path.dirname(__file__) + "/input.txt"))
+    while True:
+        print(find_basins(os.path.dirname(__file__) + "/input.txt"))
