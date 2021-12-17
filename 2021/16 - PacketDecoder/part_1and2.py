@@ -58,7 +58,6 @@ class Packet:
                     new_packet = Packet(end_pos, self)
                     self.inner_packets.append(new_packet)
                     end_pos = new_packet.read_packet(binary)
-                return end_pos
             else: # Next 11 bits contain number of sub-packets
                 no_packets = int(binary[self.start_pos+7:self.start_pos+18], base=2)
                 end_pos = self.start_pos + 18
