@@ -1,5 +1,4 @@
 use std::collections::HashMap;
-use std::ops::Deref;
 use std::{env, fs};
 
 fn parse_input(input_string: &str) -> Vec<(Vec<&str>, &str)> {
@@ -52,7 +51,7 @@ fn run_instruction(variables: &HashMap<&str, u16>, instruction: &Vec<&str>) -> u
 fn run_program<'a, 'b>(instructions: &Vec<(Vec<&'a str>, &'b str)>) -> HashMap<&'b str, u16> {
     let mut variables = HashMap::new();
 
-    let mut operations = ["AND", "OR", "LSHIFT", "RSHIFT", "NOT"];
+    let operations = ["AND", "OR", "LSHIFT", "RSHIFT", "NOT"];
 
     let mut any_unknowns = true;
     while any_unknowns {
@@ -81,7 +80,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     let filename = &args[1];
     let string = fs::read_to_string(filename).expect("File cannot be read");
-    let mut instructions = parse_input(&string);
+    let instructions = parse_input(&string);
     let variables = run_program(&instructions);
 
     let part_1_answer = variables.get("a").unwrap();
@@ -90,7 +89,7 @@ fn main() {
 
     // Part 2
     let mut new_instructions = Vec::new();
-    for (idx, (input, output)) in instructions.iter().enumerate() {
+    for (input, output) in instructions.iter() {
         if input.len() == 1 && input[0].parse::<u16>().is_ok() && output == &"b" {
             new_instructions.push(([part_1_answer].to_vec(), "b"));
         } else {
